@@ -1,0 +1,38 @@
+.banks-page {
+  width: 80vw;
+  justify-self: center;
+  .banks-page__header {
+    display: grid;
+    // grid-auto-flow: column;
+    grid-template-columns: 1fr auto;
+  }
+  .bank {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    border-bottom: 1px solid rgb(39, 39, 39);
+    padding: 10px;
+    h1 {
+      grid-column: 1/3;
+      grid-row: 1;
+    }
+    .bank__info {
+      display: grid;
+      grid-auto-flow: row;
+    }
+    .bank__actions {
+      display: grid;
+      justify-self: right;
+      .bank__actions__delete-icon {
+        &:hover {
+          fill: red;
+        }
+      }
+      .bank__actions__edit-icon {
+        &:hover {
+          fill: orange;
+        }
+      }
+    }
+  }
+}

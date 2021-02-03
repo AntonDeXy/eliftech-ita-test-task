@@ -1,0 +1,40 @@
+.header-wrapper {
+  background-color: rgb(161, 161, 0);
+  display: grid;
+  header {
+    justify-self: center;
+    width: 80vw;
+    height: 5em;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    a {
+      text-decoration: none;
+      color: white;
+      justify-self: start;
+      h1 {
+        margin: 0;
+      }
+    }
+    nav {
+      ul {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        list-style: none;
+        grid-auto-flow: column;
+        gap: 2em;
+        a {
+          color: white;
+          text-decoration: none;
+          &:hover {
+            color: #67ff52;
+          }
+        }
+        .active {
+          color: #7ffa6e;
+        }
+      }
+    }
+  }
+}

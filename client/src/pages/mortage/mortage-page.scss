@@ -1,0 +1,9 @@
+.mortage-page {
+  width: 80vw;
+  justify-self: center;
+  form {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 1.5em;
+  }
+}
