@@ -117,7 +117,7 @@ function App() {
   }
 
   const handleLogout = async () => {
-    const res = await api.logOut()
+    const res = await api.logout()
 
     if (res.success) {
       setUser({})

@@ -24,14 +24,14 @@ const removeTokensFromLs = () => {
 }
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     const token = getAccessTokenFromLS()
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
   },
-  err => {
+  (err) => {
     console.log(err)
   }
 )
@@ -62,81 +62,101 @@ axios.interceptors.request.use(
 
 const api = {
   async getAllBanks() {
-    const res = await axios.get(`${baseUrl}/banks/get-all`)
+    try {
+      const res = await axios.get(`${baseUrl}/banks/get-all`)
 
-    return res.data
+      return res.data
+    } catch (err) {
+      return err.response.data
+    }
   },
   async createBank(bank) {
-    const res = await axios.post(`${baseUrl}/banks/create`, { bank })
+    try {
+      const res = await axios.post(`${baseUrl}/banks/create`, { bank })
 
-    return res.data
+      return res.data
+    } catch (err) {
+      return err.response.data
+    }
   },
   async deleteBank(bankId) {
-    const res = await axios.delete(`${baseUrl}/banks/delete/${bankId}`)
+    try {
+      const res = await axios.delete(`${baseUrl}/banks/delete/${bankId}`)
 
-    return res.data
+      return res.data
+    } catch (err) {
+      return err.response.data
+    }
   },
   async editBank(bankId, newBankData) {
-    const res = await axios.put(`${baseUrl}/banks/edit/${bankId}`, {
-      bank: newBankData,
-    })
+    try {
+      const res = await axios.put(`${baseUrl}/banks/edit/${bankId}`, {
+        bank: newBankData,
+      })
 
-    return res.data
+      return res.data
+    } catch (err) {
+      return err.response.data
+    }
   },
   async addMortage(mortage) {
-    const res = await axios.post(
-      `${baseUrl}/add-mortage`,
-      { mortage },
-      // { headers: { Authorization: getAccessTokenFromLS() } }
-    )
+    try {
+      const res = await axios.post(`${baseUrl}/mortages/add`, { mortage })
 
-    return res.data
+      return res.data
+    } catch (err) {
+      return err.response.data
+    }
   },
   async removeMortage(mortageId) {
-    const res = await axios.delete(`${baseUrl}/remove-mortage/${mortageId}`, {
-      // headers: { Authorization: getAccessTokenFromLS() },
-    })
+    try {
+      const res = await axios.delete(`${baseUrl}/mortages/remove/${mortageId}`)
 
-    return res.data
+      return res.data
+    } catch (err) {
+      return err.response.data
+    }
   },
   async login(authData) {
     try {
-      const res = await axios.post(`${baseUrl}/login`, { ...authData })
+      const res = await axios.post(`${baseUrl}/auth/login`, { ...authData })
 
       saveAccessTokenToLS(res.data.accessToken)
       saveRefreshTokenToLS(res.data.refreshToken)
-      
+
       return res.data
     } catch (err) {
       return err.response.data
     }
-    
-
   },
   async register(authData) {
     try {
-      const res = await axios.post(`${baseUrl}/register`, { ...authData })
+      const res = await axios.post(`${baseUrl}/auth/register`, { ...authData })
       return res.data
     } catch (err) {
       return err.response.data
     }
   },
-  async logOut() {
-    const refreshToken = getRefreshTokenFromLS()
-    const res = await axios.post(`${baseUrl}/logout`, { refreshToken })
-
-    if (res.status === 204) {
-      removeTokensFromLs()
-      return { success: true }
+  async logout() {
+    try {
+      const refreshToken = getRefreshTokenFromLS()
+      const res = await axios.post(`${baseUrl}/auth/logout`, { refreshToken })
+  
+      if (res.status === 204) {
+        removeTokensFromLs()
+        return { success: true }
+      }
+  
+      return { success: false }
+    } catch (err) {
+      return { success: false }
     }
-
-    return { success: false }
   },
   async getNewAccessToken() {
     const refreshToken = getRefreshTokenFromLS()
 
     if (refreshToken) {
-      const res = await axios.post(`${baseUrl}/get-new-token`, { refreshToken })
+      const res = await axios.post(`${baseUrl}/auth/get-new-token`, { refreshToken })
 
       if (res.status === 401 || res.status === 403) {
         return { success: false }
@@ -152,7 +172,7 @@ const api = {
     } else {
       return { success: false }
     }
-  },
+  }
 }
 
 export default api

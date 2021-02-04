@@ -7,7 +7,7 @@ const MortagesHistory = ({mortagesHistory, removeMortage, showTableFromHistory})
   return (
     <div className="mortages-history">
       {sortedMortageHistoryItems && sortedMortageHistoryItems.map(mortage => {
-        return <MortagesHistoryCard showTable={() => showTableFromHistory(mortage.tableData)} mortage={mortage} removeMortage={() => removeMortage(mortage._id)} />
+        return <MortagesHistoryCard key={mortage._id} showTable={() => showTableFromHistory(mortage.tableData)} mortage={mortage} removeMortage={() => removeMortage(mortage._id)} />
       })}
     </div>
   )

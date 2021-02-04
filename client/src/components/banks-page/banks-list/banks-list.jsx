@@ -11,6 +11,7 @@ const BanksList = ({ banks, deleteBank, openBankModal }) => {
             className="animation-wrapper"
             initial={{ x: -300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
+            key={bank._id}
           >
             <BanksListItem
               bank={bank}

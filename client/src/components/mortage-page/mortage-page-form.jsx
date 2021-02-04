@@ -101,8 +101,8 @@ const MortagePageForm = ({
         >
           <option aria-label="None" value="" />
           
-          {banks?.map((bank) => {
-            return <option value={bank._id}>{bank.name}</option>
+          {banks?.map(bank => {
+            return <option key={bank._id} value={bank._id}>{bank.name}</option>
           })}
 
         </Select>

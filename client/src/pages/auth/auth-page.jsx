@@ -62,10 +62,7 @@ const AuthModal = ({ isModalOpen, closeModal, login, register }) => {
             <h2>{isLogin ? 'Login' : 'Register'}</h2>
             <CloseIcon onClick={closeModalAndClearAuthData} />
           </div>
-          <form
-            onSubmit={handleSubmit}
-            // autoComplete="off"
-          >
+          <form onSubmit={handleSubmit}>
             <TextField
               required
               id="outlined-basic"

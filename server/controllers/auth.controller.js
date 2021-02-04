@@ -84,9 +84,13 @@ exports.getNewTokenByRefreshToken = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
-  await refreshTokenModel.deleteOne({refreshToken: req.body.refreshToken})
+  try {
+    await refreshTokenModel.deleteOne({refreshToken: req.body.refreshToken})
+    res.status(204).json({success: true})
+  } catch (err) {
+    res.status(400).json({success: false})
+  }
 
-  res.status(204)
 }
 
 function generateAccessToken(user, date) {
