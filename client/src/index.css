@@ -16,4 +16,7 @@ code {
 main {
   display: grid;
   padding-top: 2em;
+  background-color: #fcf8ec;
+  min-height: calc(100vh - 5em);
+  align-items: baseline;
 }

@@ -22,14 +22,21 @@
     .bank__actions {
       display: grid;
       justify-self: right;
+      grid-row: 2;
+      grid-column: 2;
+      align-content: space-around;
       .bank__actions__delete-icon {
-        &:hover {
-          fill: red;
+        fill: #fc3636;
+          &:hover {
+          box-shadow: 1px solid rgba(0, 0, 0, 0.4);
+          fill: #fa1111;
         }
       }
       .bank__actions__edit-icon {
+        fill: #ffbb3d;
         &:hover {
-          fill: orange;
+          box-shadow: 1px solid rgba(0, 0, 0, 0.4);
+          fill: #ffac13;
         }
       }
     }

@@ -13,13 +13,13 @@ const BanksListItem = ({bank, deleteBank, openBankModal}) => {
         <span>Loan term: {bank.loanTerm}</span>
       </div>
       <div className="bank__actions">
-        <DeleteForeverIcon
-          className="bank__actions__delete-icon"
-          onClick={() => deleteBank(bank._id)}
-        />
         <EditIcon
           className="bank__actions__edit-icon"
           onClick={() => openBankModal('edit', bank)}
+        />
+        <DeleteForeverIcon
+          className="bank__actions__delete-icon"
+          onClick={() => deleteBank(bank._id)}
         />
       </div>
     </div>

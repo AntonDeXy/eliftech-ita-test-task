@@ -1,5 +1,5 @@
 .header-wrapper {
-  background-color: rgb(161, 161, 0);
+  background-color: #456268;
   display: grid;
   header {
     justify-self: center;
@@ -10,7 +10,7 @@
     align-items: center;
     a {
       text-decoration: none;
-      color: white;
+      color: #fcf8ec;
       justify-self: start;
       h1 {
         margin: 0;
@@ -25,14 +25,14 @@
         grid-auto-flow: column;
         gap: 2em;
         a {
-          color: white;
+          color: #fcf8ec;
           text-decoration: none;
           &:hover {
-            color: #67ff52;
+            color: #d0e8f2;
           }
         }
         .active {
-          color: #7ffa6e;
+          color: #d0e8f2;
         }
       }
     }
