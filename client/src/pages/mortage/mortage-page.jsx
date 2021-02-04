@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import MortagePageForm from '../../components/mortage-page/mortage-page-form'
 import MortagePageTable from '../../components/mortage-page/mortage-page-table'
+import MortagesHistory from '../../components/mortage-page/mortages-history'
 
 import './mortage-page.scss'
 
-const MortagePage = ({ banks }) => {
+const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) => {
   const initialInputData = {
     initialLoan: 0,
     downPayment: 0,
@@ -33,6 +34,12 @@ const MortagePage = ({ banks }) => {
     */
 
     return +monthlyPayment
+  }
+
+  const showTableFromHistory = (mortange) => {
+    setMonthlyPayment('')
+    setInputData(initialInputData)
+    setTableData(mortange)
   }
 
   const handleSubmit = () => {
@@ -66,16 +73,26 @@ const MortagePage = ({ banks }) => {
 
       const tempTableData = {
         month: i,
-        totalPayment: monthlyPayment.toFixed(2),
+        totalPayment: +(monthlyPayment.toFixed(2)),
         interestPayment: +interestPayment.toFixed(2),
-        loanBalance: leftToPay < 1 ? 0 : leftToPay,
-        equity: (prevEquity + (monthlyPayment - interestPayment)).toFixed(2),
+        loanBalance: +(leftToPay < 1 ? 0 : leftToPay),
+        equity: +(prevEquity + (monthlyPayment - interestPayment)).toFixed(2),
       }
 
       tableData.push(tempTableData)
     }
 
     setTableData(tableData)
+    createMortage({
+      tableData,
+      bankData: {
+        name: chosedBank.name,
+        interestRate: chosedBank.interestRate,
+        loanTerm: chosedBank.loanTerm,
+      },
+      initialLoan: inputData.initialLoan,
+      downPayment: inputData.downPayment
+    })
     setMonthlyPayment(monthlyPayment)
   }
 
@@ -90,9 +107,9 @@ const MortagePage = ({ banks }) => {
         setChosedBankById={setChosedBankById}
       />
 
-      {monthlyPayment && <span>montlyPayment: {monthlyPayment.toFixed(2)}</span>}
-
       {tableData.length > 0 && <MortagePageTable tableData={tableData} />}
+    
+      <MortagesHistory showTableFromHistory={showTableFromHistory} removeMortage={removeMortage} mortagesHistory={mortagesHistory} />
     </div>
   )
 }

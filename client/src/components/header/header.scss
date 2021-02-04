@@ -23,12 +23,20 @@
         display: grid;
         list-style: none;
         grid-auto-flow: column;
+        align-items: center;
         gap: 2em;
-        a {
+        li {
           color: #fcf8ec;
           text-decoration: none;
           &:hover {
             color: #d0e8f2;
+          }
+          span:hover {
+            cursor: pointer;
+          }
+          .username:hover {
+            color: #fcf8ec;
+            cursor: default;
           }
         }
         .active {

@@ -3,7 +3,6 @@ import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloseIcon from '@material-ui/icons/Close'
-import api from '../../api/api'
 import { motion } from 'framer-motion'
 
 import './bank-modal.scss'

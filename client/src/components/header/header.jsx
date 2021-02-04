@@ -4,12 +4,12 @@ import NavBar from '../navbar/navbar'
 
 import './header.scss'
 
-const Header = (props) => {
+const Header = ({openAuthModal, user, logout}) => {
   return (
     <div className="header-wrapper">
       <header>
         <Link to='/'><h1>Mortage Calc</h1></Link>
-        <NavBar />
+        <NavBar logout={logout} user={user} openAuthModal={openAuthModal} />
       </header>
     </div>
   )

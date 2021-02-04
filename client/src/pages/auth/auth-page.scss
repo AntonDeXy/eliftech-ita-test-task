@@ -1,0 +1,44 @@
+.auth-modal__wrapper {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  .auth-modal {
+      @media screen and (max-width: 768px) {
+        min-width: 80vw;
+      }
+      @media screen and (min-width: 768px) {
+        min-width: 40vw;
+      }
+      .auth-modal__header {
+        display: grid;
+        grid-auto-flow: column;
+        svg {
+          justify-self: end;
+          &:hover {
+            fill: red;
+          }
+        }
+      }
+      display: grid;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      gap: 1.5em;
+      h2 {
+        margin: 0;
+      }
+      form {
+        display: grid;
+        grid-auto-flow: row;
+        gap: 1em;
+        .error-message {
+          color: red;
+        }
+        .buttons {
+          display: grid;
+          grid-auto-flow: column;
+          justify-content: space-between;
+        }
+      }
+  }
+}
