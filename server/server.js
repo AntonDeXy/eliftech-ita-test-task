@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const cors = require('cors')
 const routes = require('./routes/routes')
 const isAuth = require('./middlewares/isAuth')
+const path = require('path')
+
 const app = express()
 
 const MONGO_USERNAME = 'admin'
@@ -18,6 +20,8 @@ app.use(isAuth)
 app.use(express.json())
 
 app.use(cors('*'))
+
+app.use(express.static(path.join(__dirname, '../client/build')))
 
 app.use('/api', routes)
 
