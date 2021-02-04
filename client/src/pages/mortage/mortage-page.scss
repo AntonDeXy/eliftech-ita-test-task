@@ -1,9 +1,44 @@
 .mortage-page {
+  display: grid;
   width: 80vw;
   justify-self: center;
+  gap: 2em;
   form {
     display: grid;
     grid-auto-flow: row;
-    gap: 1.5em;
+    gap: 2em;
+    .field-wrapper {
+      display: grid;
+      grid-auto-flow: row;
+      gap: 0.5em;
+      .error-message {
+        color: red;
+      }
+    }
+  }
+  table {
+    justify-self: center;
+    border-spacing: 0;
+    border: 1px solid black;
+
+    tr {
+      &:last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
   }
 }

@@ -3,7 +3,6 @@
   justify-self: center;
   .banks-page__header {
     display: grid;
-    // grid-auto-flow: column;
     grid-template-columns: 1fr auto;
   }
   .bank {

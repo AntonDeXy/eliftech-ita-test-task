@@ -17,8 +17,11 @@ const BankModal = ({ modalData, closeModal }) => {
   }), []) 
 
   const [bank, setBank] = useState({})
+  const [error, setError] = useState('')
 
   useEffect(() => {
+    setError('')
+
     if (modalData.type === "edit") {
       setBank(modalData.bankData)
     } else {
@@ -33,6 +36,17 @@ const BankModal = ({ modalData, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    setError('')
+
+    const bankKeys = Object.keys(initialBankState)
+
+    const isAnyValueEqualsZero = bankKeys.some(key => bank[key] === 0)
+
+    if (isAnyValueEqualsZero) {
+      return setError('Values must be greates than 0')
+    }
+
     const res = modalData.type === 'edit' 
     ? await api.editBank(bank._id, bank)
     : await api.createBank(bank)
@@ -42,10 +56,19 @@ const BankModal = ({ modalData, closeModal }) => {
     }
   }
 
+  const handleNumberChange = (value, key, min, max) => {
+    if (checkIfValueIsRight(value, min, max)) {
+      setBank({...bank, [key]: value})
+    }
+  }
+
   const checkIfValueIsRight = (value, min, max) => {
+    setError('')
+
     if (value >= min && (max ? value <= max : true)) {
       return true
     }
+
     return false
   }
 
@@ -70,7 +93,7 @@ const BankModal = ({ modalData, closeModal }) => {
             id="outlined-basic" variant="outlined"
             label="Interest rate %" 
             value={bank.interestRate} 
-            onChange={(e) => checkIfValueIsRight(e.target.value, 0, 100) && setBank({...bank, interestRate: e.target.value})}
+            onChange={e => handleNumberChange(+e.target.value, 'interestRate', 0, 100)}
           />
           <TextField 
             required
@@ -78,7 +101,7 @@ const BankModal = ({ modalData, closeModal }) => {
             id="outlined-basic" variant="outlined"
             label="Maximum loan" 
             value={bank.maximumLoan} 
-            onChange={(e) => checkIfValueIsRight(e.target.value, 0) &&  setBank({...bank, maximumLoan: e.target.value})}
+            onChange={e => handleNumberChange(+e.target.value, 'maximumLoan', 0)}
           />
           <TextField 
             required
@@ -86,7 +109,7 @@ const BankModal = ({ modalData, closeModal }) => {
             id="outlined-basic" variant="outlined"
             label="Minimum down payment %" 
             value={bank.minimumDownPayment} 
-            onChange={(e) => checkIfValueIsRight(e.target.value, 0, 100) &&  setBank({...bank, minimumDownPayment: e.target.value})}
+            onChange={e => handleNumberChange(+e.target.value, 'minimumDownPayment', 0, 100)}
           />
           <TextField 
             required
@@ -94,8 +117,11 @@ const BankModal = ({ modalData, closeModal }) => {
             id="outlined-basic" variant="outlined"
             label="Loan term (month count)" 
             value={bank.loanTerm} 
-            onChange={(e) => checkIfValueIsRight(e.target.value, 0) &&  setBank({...bank, loanTerm: e.target.value})}
+            onChange={e => handleNumberChange(+e.target.value, 'loanTerm', 0)}
           />
+
+          {error && <span className='error-message'>{error}</span>}
+          
           <Button type="submit" variant="contained" color="primary">
             {modalData.type === "edit" ? 'Edit' : 'Create'}
           </Button>
