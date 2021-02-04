@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cors = require('cors')
 const routes = require('./routes/routes')
+const isAuth = require('./middlewares/isAuth')
 const app = express()
 
 const MONGO_USERNAME = 'admin'
@@ -12,12 +13,13 @@ const MONGO_DBNAME = 'test'
 
 app.use(morgan('tiny'))
 
-app.use(cors('*'))
+app.use(isAuth)
 
 app.use(express.json())
 
-app.use('/api', routes)
+app.use(cors('*'))
 
+app.use('/api', routes)
 
 mongoose.connect(
   `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.d5k0m.mongodb.net/${MONGO_DBNAME}?retryWrites=true&w=majority`,
