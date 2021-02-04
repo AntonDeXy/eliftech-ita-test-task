@@ -37,8 +37,9 @@ exports.editBank = async (req,res) => {
     bank.minimumDownPayment = bankFromReq.minimumDownPayment
     bank.loanTerm = bankFromReq.loanTerm
 
-    await bank.save()
-    res.json({success: true, bank})
+    const updatedBank = await bank.save()
+
+    res.json({success: true, bank: await BankModel.findOne({_id: req.params.bankId})})
   } catch (err) {
     console.log(err)
     res.json({success: false})

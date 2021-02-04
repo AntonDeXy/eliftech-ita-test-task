@@ -7,7 +7,7 @@ import api from '../../api/api'
 
 import './bank-modal.scss'
 
-const BankModal = ({ modalData, closeModal }) => {
+const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
   const initialBankState = useMemo(() => ({
     name: '',
     interestRate: 0,
@@ -48,11 +48,13 @@ const BankModal = ({ modalData, closeModal }) => {
     }
 
     const res = modalData.type === 'edit' 
-    ? await api.editBank(bank._id, bank)
-    : await api.createBank(bank)
+    ? await updateBank(bank._id, bank)
+    : await createBank(bank)
 
-    if (res.success) {
+    if (res) {
       closeModalAndClearBankData()
+    } else {
+      setError('Something went wrong, try again later')
     }
   }
 
