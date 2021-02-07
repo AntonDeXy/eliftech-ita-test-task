@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { config } from '../config'
 
-const baseUrl = 'http://localhost:5000/api'
+const baseUrl = config.baseApiUrl
 
 const saveAccessTokenToLS = (accessToken: string) => {
   localStorage.setItem('accessToken', accessToken)
