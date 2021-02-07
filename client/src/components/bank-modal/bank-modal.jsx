@@ -91,7 +91,10 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
       >
         <div className="create-bank-modal">
           <div className="create-bank-modal__header">
-            <h2>Create bank</h2>
+            <h2>
+              {modalData.type === 'edit' ? 'Edit ' : 'Create '}
+              bank
+            </h2>
             <CloseIcon onClick={closeModalAndClearBankData} />
           </div>
           <form onSubmit={handleSubmit} autoComplete="off">
@@ -130,12 +133,7 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
               label="Minimum down payment %"
               value={bank.minimumDownPayment}
               onChange={(e) =>
-                handleNumberChange(
-                  e.target.value,
-                  'minimumDownPayment',
-                  0,
-                  100
-                )
+                handleNumberChange(e.target.value, 'minimumDownPayment', 0, 100)
               }
             />
             <TextField

@@ -66,27 +66,27 @@ const api = {
     try {
       const res = await axios.get(`${baseUrl}/banks/get-all`)
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async createBank(bank) {
     try {
       const res = await axios.post(`${baseUrl}/banks/create`, { bank })
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async deleteBank(bankId) {
     try {
       const res = await axios.delete(`${baseUrl}/banks/delete/${bankId}`)
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async editBank(bankId, newBankData) {
@@ -95,47 +95,47 @@ const api = {
         bank: newBankData,
       })
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async addMortage(mortage) {
     try {
       const res = await axios.post(`${baseUrl}/mortages/add`, { mortage })
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async removeMortage(mortageId) {
     try {
       const res = await axios.delete(`${baseUrl}/mortages/remove/${mortageId}`)
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async login(authData) {
     try {
       const res = await axios.post(`${baseUrl}/auth/login`, { ...authData })
 
-      saveAccessTokenToLS(res.data.accessToken)
-      saveRefreshTokenToLS(res.data.refreshToken)
+      saveAccessTokenToLS(res?.data.accessToken)
+      saveRefreshTokenToLS(res?.data.refreshToken)
 
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async register(authData) {
     try {
       const res = await axios.post(`${baseUrl}/auth/register`, { ...authData })
-      return res.data
+      return res?.data
     } catch (err) {
-      return err.response.data
+      return err?.response?.data
     }
   },
   async logout() {
@@ -162,12 +162,12 @@ const api = {
       if (res.status === 401 || res.status === 403) {
         return { success: false }
       } else {
-        saveAccessTokenToLS(res.data.accessToken)
+        saveAccessTokenToLS(res?.data.accessToken)
 
         return {
           success: true,
-          accessToken: res.data.accessToken,
-          user: res.data.user,
+          accessToken: res?.data.accessToken,
+          user: res?.data.user,
         }
       }
     } else {

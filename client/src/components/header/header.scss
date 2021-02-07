@@ -2,13 +2,15 @@
   background-color: #456268;
   display: grid;
   header {
+    width: 100vw;
     justify-self: center;
-    width: 80vw;
+    // width: 80vw;
     height: 5em;
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
     a {
+      padding-left: 2em;
       text-decoration: none;
       color: #fcf8ec;
       justify-self: start;
@@ -16,8 +18,15 @@
         margin: 0;
       }
     }
+    .mobile-menu {
+      svg {
+        fill: white;
+      }
+    }
+  
     nav {
-      ul {
+      padding-right: 2em;
+        ul {
         margin: 0;
         padding: 0;
         display: grid;

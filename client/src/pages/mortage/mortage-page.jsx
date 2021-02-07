@@ -7,13 +7,12 @@ import './mortage-page.scss'
 
 const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) => {
   const initialInputData = {
-    initialLoan: 0,
-    downPayment: 0,
+    initialLoan: '',
+    downPayment: '',
   }
 
   const [inputData, setInputData] = useState(initialInputData)
   const [chosedBank, setChosedBank] = useState({})
-  const [monthlyPayment, setMonthlyPayment] = useState()
   const [tableData, setTableData] = useState([])
 
   const setChosedBankById = (id) => {
@@ -37,7 +36,6 @@ const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) =
   }
 
   const showTableFromHistory = (mortange) => {
-    setMonthlyPayment('')
     setInputData(initialInputData)
     setTableData(mortange)
   }
@@ -93,7 +91,6 @@ const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) =
       initialLoan: inputData.initialLoan,
       downPayment: inputData.downPayment
     })
-    setMonthlyPayment(monthlyPayment)
   }
 
   return (
