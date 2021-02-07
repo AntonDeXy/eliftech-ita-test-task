@@ -13,13 +13,14 @@ const MONGO_USERNAME = 'admin'
 const MONGO_PASSWORD = 'admin'
 const MONGO_DBNAME = 'test'
 
+app.use(cors('*'))
+
 app.use(morgan('tiny'))
 
 app.use(isAuth)
 
 app.use(express.json())
 
-app.use(cors('*'))
 
 app.use(express.static(path.join(__dirname, '../client/build')))
 

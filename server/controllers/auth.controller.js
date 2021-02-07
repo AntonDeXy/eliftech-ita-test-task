@@ -94,11 +94,27 @@ exports.logout = async (req, res) => {
 }
 
 function generateAccessToken(user, date) {
-  return jwt.sign({user, createdAt: date}, config.jwt.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
+  const userForToken = {
+    _id: user._id,
+    username: user.username
+  }
+
+  return jwt.sign({user: userForToken, createdAt: date}, config.jwt.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
 }
 
 async function generateRefreshToken(user, date) {
-  const refreshToken = jwt.sign({user, createdAt: date}, config.jwt.REFRESH_TOKEN_SECRET)
-  await new refreshTokenModel({refreshToken}).save()
-  return refreshToken
+  const userForToken = {
+    _id: user._id,
+    username: user.username
+  }
+
+  const refreshToken = jwt.sign({user: userForToken, createdAt: date}, config.jwt.REFRESH_TOKEN_SECRET)
+  
+  try {
+    await new refreshTokenModel({refreshToken}).save()
+    return refreshToken
+  } catch (err) {
+    throw new Error(err)
+  }
+  
 }

@@ -8,6 +8,12 @@ body {
   font-family: sans-serif;
 }
 
+#simple-menu a {
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

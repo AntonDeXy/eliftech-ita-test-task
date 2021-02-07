@@ -15,37 +15,28 @@ const MortagePageForm = ({
   const [initialLoanError, setInitialLoanError] = useState('')
   const [downPaymentError, setDownPaymentError] = useState('')
 
-  const handleInitialLoan = (value) => {
-    setInitialLoanError('')
-
-    if (value <= 0) {
-      return setInitialLoanError('Initial loan must be greater than 0')
-    } else if (value > chosedBank.maximumLoan) {
-      return setInitialLoanError(
+  const checkInitialLoan = (loan) => {
+    if (loan <= 0) {
+      setInitialLoanError('Initial loan must be greater than 0')
+      return false
+    } else if (loan > chosedBank.maximumLoan) {
+      setInitialLoanError(
         `This bank offers maximum ${chosedBank.maximumLoan}`
       )
+      return false
     }
 
-    setInputData({ ...inputData, initialLoan: value })
+    return true
   }
 
-  const handleDownPayment = (value) => {
+  const checkDownPayment = (downPayment) => {
     setDownPaymentError('')
 
-    if (value <= 0) {
+    if (downPayment <= 0) {
       return setDownPaymentError('Down payment must be greater than 0')
-    } else if (value >= inputData.initialLoan) {
+    } else if (downPayment >= inputData.initialLoan) {
       return setDownPaymentError("Down payment can't be greater than loan or equal it")
     }
-
-    setInputData({ ...inputData, downPayment: value })
-  }
-
-  const checkIfValuesAreRight = (e) => {
-    e.preventDefault()
-
-    setDownPaymentError('')
-    setInitialLoanError('')
 
     const minimumDownPayment = inputData.initialLoan * (chosedBank.minimumDownPayment / 100)
     
@@ -54,6 +45,19 @@ const MortagePageForm = ({
     } else if (inputData.downPayment >= inputData.initialLoan) {
       return setDownPaymentError("Down payment can't be greater than loan or equal it")
     }
+
+  }
+
+  const checkIfValuesAreRight = (e) => {
+    e.preventDefault()
+
+    setDownPaymentError('')
+    setInitialLoanError('')
+
+    // check initial loan
+    checkInitialLoan(inputData.initialLoan)
+    // check initial downpayment
+    checkDownPayment(inputData.downPayment)
 
     handleSubmit()
   }
@@ -68,7 +72,9 @@ const MortagePageForm = ({
           variant="outlined"
           label="Initial loan"
           value={inputData.initialLoan}
-          onChange={(e) => handleInitialLoan(+e.target.value)}
+          onChange={(e) => {
+            setInputData({ ...inputData, initialLoan: e.target.value ? +e.target.value : '' })
+          }}
         />
         {initialLoanError && <span className="error-message">{initialLoanError}</span>}
       </div>
@@ -81,7 +87,7 @@ const MortagePageForm = ({
           label="Down payment"
           value={inputData.downPayment}
           onChange={(e) =>
-            handleDownPayment(+e.target.value)
+            setInputData({ ...inputData, downPayment: e.target.value ? +e.target.value : '' })
           }
         />
         {downPaymentError && <span className="error-message">{downPaymentError}</span>}

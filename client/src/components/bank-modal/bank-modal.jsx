@@ -11,10 +11,10 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
   const initialBankState = useMemo(
     () => ({
       name: '',
-      interestRate: 0,
-      maximumLoan: 0,
-      minimumDownPayment: 0,
-      loanTerm: 0,
+      interestRate: '',
+      maximumLoan: '',
+      minimumDownPayment: '',
+      loanTerm: '',
     }),
     []
   )
@@ -63,8 +63,12 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
   }
 
   const handleNumberChange = (value, key, min, max) => {
-    if (checkIfValueIsRight(value, min, max)) {
-      setBank({ ...bank, [key]: value })
+    if (!value) {
+      return setBank({ ...bank, [key]: '' })
+    }
+
+    if (checkIfValueIsRight(+value, min, max)) {
+      setBank({ ...bank, [key]: +value })
     }
   }
 
@@ -87,7 +91,10 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
       >
         <div className="create-bank-modal">
           <div className="create-bank-modal__header">
-            <h2>Create bank</h2>
+            <h2>
+              {modalData.type === 'edit' ? 'Edit ' : 'Create '}
+              bank
+            </h2>
             <CloseIcon onClick={closeModalAndClearBankData} />
           </div>
           <form onSubmit={handleSubmit} autoComplete="off">
@@ -101,51 +108,42 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
             />
             <TextField
               required
-              type="number"
               id="outlined-basic"
               variant="outlined"
               label="Interest rate %"
               value={bank.interestRate}
               onChange={(e) =>
-                handleNumberChange(+e.target.value, 'interestRate', 0, 100)
+                handleNumberChange(e.target.value, 'interestRate', 0, 100)
               }
             />
             <TextField
               required
-              type="number"
               id="outlined-basic"
               variant="outlined"
               label="Maximum loan"
               value={bank.maximumLoan}
               onChange={(e) =>
-                handleNumberChange(+e.target.value, 'maximumLoan', 0)
+                handleNumberChange(e.target.value, 'maximumLoan', 0)
               }
             />
             <TextField
               required
-              type="number"
               id="outlined-basic"
               variant="outlined"
               label="Minimum down payment %"
               value={bank.minimumDownPayment}
               onChange={(e) =>
-                handleNumberChange(
-                  +e.target.value,
-                  'minimumDownPayment',
-                  0,
-                  100
-                )
+                handleNumberChange(e.target.value, 'minimumDownPayment', 0, 100)
               }
             />
             <TextField
               required
-              type="number"
               id="outlined-basic"
               variant="outlined"
               label="Loan term (month count)"
               value={bank.loanTerm}
               onChange={(e) =>
-                handleNumberChange(+e.target.value, 'loanTerm', 0)
+                handleNumberChange(e.target.value, 'loanTerm', 0)
               }
             />
 
