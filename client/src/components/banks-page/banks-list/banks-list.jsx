@@ -15,7 +15,7 @@ const BanksList = ({ banks, deleteBank, openBankModal }) => {
           >
             <BanksListItem
               bank={bank}
-              deleteBank={deleteBank}
+              deleteBank={() => deleteBank(bank._id)}
               openBankModal={openBankModal}
             />
           </motion.div>

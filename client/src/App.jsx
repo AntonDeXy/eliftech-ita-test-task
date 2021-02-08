@@ -7,6 +7,8 @@ import BankModalComp from './components/bank-modal/bank-modal'
 import api from './api/api'
 import AuthModal from './pages/auth/auth-page'
 
+import 'antd/dist/antd.css'
+
 function App() {
   const [bankModal, setBankModal] = useState({isOpen: false, type: '', bankData: {}})
   const [banks, setBanks] = useState(null)
