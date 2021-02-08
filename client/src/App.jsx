@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { HashRouter as BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import Header from './components/header/header'
 import BanksPage from './pages/banks/banks-page'
 import MortagePage from './pages/mortage/mortage-page'
@@ -8,6 +8,7 @@ import api from './api/api'
 import AuthModal from './pages/auth/auth-page'
 
 import 'antd/dist/antd.css'
+import PageNotFound from './pages/page-not-found/page-not-found'
 
 function App() {
   const [bankModal, setBankModal] = useState({isOpen: false, type: '', bankData: {}})
@@ -163,10 +164,12 @@ function App() {
               createMortage={createMortage} 
               mortagesHistory={user.mortages} banks={banks}/>
           </Route>
+          <Route component={PageNotFound} />
         </Switch>
       </main>
     </BrowserRouter>
   )
 }
+
 
 export default App
