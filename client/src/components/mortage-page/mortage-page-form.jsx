@@ -41,7 +41,7 @@ const MortagePageForm = ({
     const minimumDownPayment = inputData.initialLoan * (chosedBank.minimumDownPayment / 100)
     
     if (inputData.downPayment < minimumDownPayment) {
-      return setDownPaymentError(`Down payment must be at least ${chosedBank.interestRate}% (${Math.ceil(minimumDownPayment)})`)
+      return setDownPaymentError(`Down payment must be at least ${chosedBank.minimumDownPayment}% (${Math.ceil(minimumDownPayment)})`)
     } else if (inputData.downPayment >= inputData.initialLoan) {
       return setDownPaymentError("Down payment can't be greater than loan or equal it")
     }

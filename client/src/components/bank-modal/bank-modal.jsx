@@ -41,13 +41,18 @@ const BankModal = ({ modalData, closeModal, createBank, updateBank }) => {
     e.preventDefault()
 
     setError('')
+    
+    const isAnyZeroes = Object.keys(bank).some(key => {
+      if (key !== 'name' && bank[key] === 0) {
+        return true
+      }
+      return false
+    })
 
-    const bankKeys = Object.keys(initialBankState)
-
-    const isAnyValueEqualsZero = bankKeys.some((key) => bank[key] === 0)
-
-    if (isAnyValueEqualsZero) {
-      return setError('Values must be greates than 0')
+    if (
+      isAnyZeroes
+    ) {
+      return setError('Values must be greater than 0')
     }
 
     const res =
