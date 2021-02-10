@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { HashRouter as BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import Header from './components/header/header'
 import BanksPage from './pages/banks/banks-page'
-import MortagePage from './pages/mortage/mortage-page'
+import MortgagePage from './pages/mortgage/mortgage-page'
 import BankModalComp from './components/bank-modal/bank-modal'
 import api from './api/api'
 import AuthModal from './pages/auth/auth-page'
@@ -22,12 +22,12 @@ function App() {
     setBanks(res.banks)
   }, [])
 
-  const createMortage = async (mortage) => {
+  const createMortgage = async (mortgage) => {
     if (!user.username) {
       return false
     }
 
-    const res = await api.addMortage(mortage)
+    const res = await api.addMortgage(mortgage)
 
     if (res.success) {
       setUser(res.user)
@@ -36,12 +36,12 @@ function App() {
     return res
   }
 
-  const handleRemoveMortage = async (mortageId) => {
+  const handleRemoveMortgage = async (mortgageId) => {
     if (!user.username) {
       return false
     }
 
-    const res = await api.removeMortage(mortageId)
+    const res = await api.removeMortgage(mortgageId)
 
     if (res.success) {
       setUser(res.user)
@@ -158,11 +158,11 @@ function App() {
               deleteBank={handleBankDelete} 
               openBankModal={(type, bankData) => setBankModal({isOpen: true, type, bankData})} />
           </Route>
-          <Route path='/mortage'>
-            <MortagePage 
-              removeMortage={handleRemoveMortage}
-              createMortage={createMortage} 
-              mortagesHistory={user.mortages} banks={banks}/>
+          <Route path='/mortgage'>
+            <MortgagePage 
+              removeMortgage={handleRemoveMortgage}
+              createMortgage={createMortgage} 
+              mortgagesHistory={user.mortgages} banks={banks}/>
           </Route>
           <Route component={PageNotFound} />
         </Switch>

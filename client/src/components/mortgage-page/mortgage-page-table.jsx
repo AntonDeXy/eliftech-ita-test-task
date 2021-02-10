@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 
-const MortagePageTable = ({ tableData }) => {
+const MortgagePageTable = ({ tableData }) => {
   const columns = useMemo(
     () => [
       {
@@ -66,4 +66,4 @@ const MortagePageTable = ({ tableData }) => {
   )
 }
 
-export default MortagePageTable
+export default MortgagePageTable

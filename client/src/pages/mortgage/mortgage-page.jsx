@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import MortagePageForm from '../../components/mortage-page/mortage-page-form'
-import MortagePageTable from '../../components/mortage-page/mortage-page-table'
-import MortagesHistory from '../../components/mortage-page/mortages-history'
+import MortgagePageForm from '../../components/mortgage-page/mortgage-page-form'
+import MortgagePageTable from '../../components/mortgage-page/mortgage-page-table'
+import MortgagesHistory from '../../components/mortgage-page/mortgages-history'
 
-import './mortage-page.scss'
+import './mortgage-page.scss'
 
-const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) => {
+const MortgagePage = ({ banks, mortgagesHistory, createMortgage, removeMortgage }) => {
   const initialInputData = {
     initialLoan: '',
     downPayment: '',
@@ -81,7 +81,7 @@ const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) =
     }
 
     setTableData(tableData)
-    createMortage({
+    createMortgage({
       tableData,
       bankData: {
         name: chosedBank.name,
@@ -94,8 +94,8 @@ const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) =
   }
 
   return (
-    <div className="mortage-page">
-      <MortagePageForm
+    <div className="mortgage-page">
+      <MortgagePageForm
         banks={banks}
         handleSubmit={handleSubmit}
         inputData={inputData}
@@ -104,11 +104,11 @@ const MortagePage = ({ banks, mortagesHistory, createMortage, removeMortage }) =
         setChosedBankById={setChosedBankById}
       />
 
-      {tableData.length > 0 && <MortagePageTable tableData={tableData} />}
+      {tableData.length > 0 && <MortgagePageTable tableData={tableData} />}
     
-      <MortagesHistory showTableFromHistory={showTableFromHistory} removeMortage={removeMortage} mortagesHistory={mortagesHistory} />
+      <MortgagesHistory showTableFromHistory={showTableFromHistory} removeMortgage={removeMortgage} mortgagesHistory={mortgagesHistory} />
     </div>
   )
 }
 
-export default MortagePage
+export default MortgagePage

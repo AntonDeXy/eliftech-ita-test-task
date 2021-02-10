@@ -25,7 +25,7 @@ const DesktopMenu = ({ user, openAuthModal, logout }) => {
           <NavLink to="/banks">Bank</NavLink>
         </li>
         <li>
-          <NavLink to="/mortage">Mortage calculator</NavLink>
+          <NavLink to="/mortgage">Mortgage calculator</NavLink>
         </li>
         {user?.username ? (
           <>
@@ -74,7 +74,7 @@ const MobileMenu = ({ user, logout, login }) => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <NavLink to="/mortage">Mortage calculator</NavLink>
+          <NavLink to="/mortgage">Mortgage calculator</NavLink>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           {user?.username ? (

@@ -8,7 +8,7 @@ const Header = ({openAuthModal, user, logout}) => {
   return (
     <div className="header-wrapper">
       <header>
-        <Link to='/'><h1>Mortage Calc</h1></Link>
+        <Link to='/'><h1>Mortgage Calc</h1></Link>
         <NavBar logout={logout} user={user} openAuthModal={openAuthModal} />
       </header>
     </div>

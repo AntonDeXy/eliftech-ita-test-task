@@ -100,18 +100,18 @@ const api = {
       return err?.response?.data
     }
   },
-  async addMortage(mortage) {
+  async addMortgage(mortgage) {
     try {
-      const res = await axios.post(`${baseUrl}/mortages/add`, { mortage })
+      const res = await axios.post(`${baseUrl}/mortgages/add`, { mortgage })
 
       return res?.data
     } catch (err) {
       return err?.response?.data
     }
   },
-  async removeMortage(mortageId) {
+  async removeMortgage(mortgageId) {
     try {
-      const res = await axios.delete(`${baseUrl}/mortages/remove/${mortageId}`)
+      const res = await axios.delete(`${baseUrl}/mortgages/remove/${mortgageId}`)
 
       return res?.data
     } catch (err) {

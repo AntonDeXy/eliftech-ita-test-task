@@ -1,4 +1,4 @@
-.mortage-page {
+.mortgage-page {
   display: grid;
   width: 80vw;
   justify-self: center;
@@ -45,7 +45,7 @@
       }
     }
   }
-  .mortages-history {
+  .mortgages-history {
     display: grid;
     @media screen and (max-width: 992px) {
       grid-template-columns: 100%;      
@@ -58,7 +58,7 @@
     grid-auto-rows: auto;
     gap: 20px;
     justify-content: center;
-    .mortages-history__card {
+    .mortgages-history__card {
       display: grid;
       grid-template-columns: 100%;
       grid-template-rows: 1fr auto;

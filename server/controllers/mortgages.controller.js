@@ -1,6 +1,6 @@
 const UserModel = require('../models/user.model')
 
-exports.addMortage = async (req, res) => {
+exports.addMortgage = async (req, res) => {
   if (!req.isAuth) {
     return res.sendStatus(403)
   }
@@ -11,9 +11,9 @@ exports.addMortage = async (req, res) => {
     return res.status(400).json({success: false, msg: 'User not found'})
   }
 
-  const newMortage = req.body.mortage
+  const newMortgage = req.body.mortgage
 
-  user.mortages = [...user.mortages, newMortage]
+  user.mortgages = [...user.mortgages, newMortgage]
 
   try {
     const updatedUser = await user.save()
@@ -24,7 +24,7 @@ exports.addMortage = async (req, res) => {
   }
 } 
 
-exports.removeMortage = async (req, res) => {
+exports.removeMortgage = async (req, res) => {
   if (!req.isAuth) {
     return res.sendStatus(403)
   }
@@ -35,11 +35,11 @@ exports.removeMortage = async (req, res) => {
     return res.status(400).json({success: false, msg: 'User not found'})
   }
 
-  const newMortage = req.body.mortage
+  const newMortgage = req.body.mortgage
 
-  user.mortages = user.mortages.filter((mortage) => {
-    if (mortage.id !== req.params.mortageId) {
-      return mortage
+  user.mortgages = user.mortgages.filter((mortgage) => {
+    if (mortgage.id !== req.params.mortgageId) {
+      return mortgage
     }
   })
 
