@@ -10,7 +10,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  mortages: [new Schema({
+  mortgages: [new Schema({
     tableData: [{
       month: Number,
       totalPayment: Number,

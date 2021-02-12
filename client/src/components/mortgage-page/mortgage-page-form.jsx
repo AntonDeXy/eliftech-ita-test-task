@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import Button from '@material-ui/core/Button'
 
-const MortagePageForm = ({
+const MortgagePageForm = ({
   banks,
   handleSubmit,
   inputData,
@@ -121,4 +121,4 @@ const MortagePageForm = ({
   )
 }
 
-export default MortagePageForm
+export default MortgagePageForm
